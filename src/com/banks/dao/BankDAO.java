@@ -10,14 +10,15 @@ import com.banks.entities.Bank;
 public class BankDAO {
 
 	public ArrayList<Bank> getAll() {
+		
 		ArrayList<Bank> banks = new ArrayList<>();
 		
+		String sql = "SELECT * FROM banks";
+		
 		try {
-			String sql = "SELECT * FROM banks";
-			
 			PreparedStatement preparedStatement = BDConfig.getConnection().prepareStatement(sql);
 			ResultSet rs = preparedStatement.executeQuery();
-
+	
 			while (rs.next()) {
 				Bank bank = new Bank();
 				bank.setId(rs.getInt("id"));
@@ -25,9 +26,11 @@ public class BankDAO {
 				bank.setInstitutionName(rs.getString("institution_name"));
 				banks.add(bank);
 			}
-			
-		} catch (Exception ex) {
+		
+		} catch(Exception ex) {
 			System.err.println(ex.getMessage());
+		} finally {
+			BDConfig.closeConnection();
 		}
 		
 		return banks;
@@ -37,24 +40,25 @@ public class BankDAO {
 		
 		Bank bank = null;
 		
-		try {
-			String sql = "SELECT * FROM banks WHERE compensation_code = ?";
+		String sql = "SELECT * FROM banks WHERE compensation_code = ?";
 			
+		try {
 			PreparedStatement preparedStatement = BDConfig.getConnection().prepareStatement(sql);
 			preparedStatement.setInt(1, code);
 			ResultSet rs = preparedStatement.executeQuery();
-
+	
 			if (rs.next()) {
 				bank = new Bank();
 				bank.setId(rs.getInt("id"));
 				bank.setCompensationCode(rs.getInt("compensation_code"));
 				bank.setInstitutionName(rs.getString("institution_name"));
 			}
-			
-		} catch (Exception ex) {
+		} catch(Exception ex) {
 			System.err.println(ex.getMessage());
+		} finally {
+			BDConfig.closeConnection();
 		}
-		
+			
 		return bank;
 	}
 }

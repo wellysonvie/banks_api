@@ -24,17 +24,12 @@ public class BanksService {
 	}
 	
 	@GET
-	@Path("/all")
+	@Path("/")
 	@Produces(MediaType.APPLICATION_JSON)
 	public ArrayList<Bank> listAllBanks(){
 		
 		ArrayList<Bank> banks = null;
-		
-		try {
-			banks = bankDAO.getAll();
-		} catch(Exception ex) {
-			System.err.println(ex.getMessage());
-		}
+		banks = bankDAO.getAll();
 		
 		return banks;
 	}
@@ -46,12 +41,7 @@ public class BanksService {
 	public Bank getBankByCompensationCode(@PathParam("code") int code){
 		
 		Bank bank = null;
-		
-		try {
-			bank = bankDAO.getByCompensationCode(code);
-		} catch(Exception ex) {
-			System.err.println(ex.getMessage());
-		}
+		bank = bankDAO.getByCompensationCode(code);
 		
 		return bank;
 	}

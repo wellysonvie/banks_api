@@ -23,8 +23,13 @@ public class BDConfig {
 		return con;
 	}
 
-	public static void closeConnection() throws SQLException {
-		con.close();
+	public static void closeConnection() {
+		try {
+			con.close();
+			con = null;
+		} catch (SQLException ex) {
+			System.err.println(ex.getMessage());
+		}
 	}
 
 }
