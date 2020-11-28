@@ -1,0 +1,4 @@
+com/banks/config/BDConfig.class
+com/banks/dao/BankDAO.class
+com/banks/api/BanksService.class
+com/banks/entities/Bank.class
