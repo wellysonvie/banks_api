@@ -20,5 +20,5 @@ API desenvolvida para teste prático em Java
 
 ## Executando o projeto
 
-- Excutar o script `banks_api.sql` no cliente MySQL.
+- Executar o script `banks_api.sql` no cliente MySQL.
 - Realize o deploy do arquivo `target/BancosAPI-0.0.1-SNAPSHOT.war` em um servidor de aplicação.
